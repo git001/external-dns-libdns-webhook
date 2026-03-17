@@ -89,7 +89,7 @@ func (p WebhookProvider) ApplyChanges(ctx context.Context, changes *plan.Changes
 				record := libdns.RR{
 					Type: ep.RecordType,
 					Name: libdns.RelativeName(ep.DNSName, zone),
-					Data: target,
+					Data: strings.Trim(target, "\""),
 					TTL:  time.Duration(ep.RecordTTL) * time.Second,
 				}
 				_, err := record.RR().Parse()
